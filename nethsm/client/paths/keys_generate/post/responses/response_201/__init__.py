@@ -13,11 +13,17 @@ parameters: typing.Dict[str, typing.Type[api_client.HeaderParameterWithoutName]]
 }
 
 
-@dataclasses.dataclass
 class ApiResponse(api_response.ApiResponse):
-    response: urllib3.HTTPResponse
-    headers: header_parameters.HeadersDict
-    body: schemas.Unset = schemas.unset
+    def __init__(
+        self,
+        *,
+        response: urllib3.HTTPResponse,
+        headers: header_parameters.HeadersDict,
+        body: schemas.Unset = schemas.unset,
+    ):
+        self.response = response
+        self.body = body
+        self.headers = headers
 
 
 class ResponseFor201(api_client.OpenApiResponse[ApiResponse]):

@@ -75,12 +75,12 @@ class PublicKeyDict(schemas.immutabledict[str, int]):
             "restrictions": restrictions,
             "type": type,
         }
-        for key, val in (
+        for key_, val in (
             ("key", key),
         ):
             if isinstance(val, schemas.Unset):
                 continue
-            arg_[key] = val
+            arg_[key_] = val
         arg_.update(kwargs)
         used_arg_ = typing.cast(PublicKeyDictInput, arg_)
         return PublicKey.validate(used_arg_, configuration=configuration_)
