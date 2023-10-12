@@ -79,7 +79,7 @@ class DistinguishedNameDict(schemas.immutabledict[str, str]):
         arg_: typing.Dict[str, typing.Any] = {
             "commonName": commonName,
         }
-        for key, val in (
+        for key_, val in (
             ("countryName", countryName),
             ("stateOrProvinceName", stateOrProvinceName),
             ("localityName", localityName),
@@ -89,7 +89,7 @@ class DistinguishedNameDict(schemas.immutabledict[str, str]):
         ):
             if isinstance(val, schemas.Unset):
                 continue
-            arg_[key] = val
+            arg_[key_] = val
         arg_.update(kwargs)
         used_arg_ = typing.cast(DistinguishedNameDictInput, arg_)
         return DistinguishedName.validate(used_arg_, configuration=configuration_)
@@ -106,70 +106,49 @@ class DistinguishedNameDict(schemas.immutabledict[str, str]):
     
     @property
     def commonName(self) -> str:
-        return typing.cast(
-            str,
-            self.__getitem__("commonName")
-        )
+        return self.__getitem__("commonName")
     
     @property
     def countryName(self) -> typing.Union[str, schemas.Unset]:
         val = self.get("countryName", schemas.unset)
         if isinstance(val, schemas.Unset):
             return val
-        return typing.cast(
-            str,
-            val
-        )
+        return val
     
     @property
     def stateOrProvinceName(self) -> typing.Union[str, schemas.Unset]:
         val = self.get("stateOrProvinceName", schemas.unset)
         if isinstance(val, schemas.Unset):
             return val
-        return typing.cast(
-            str,
-            val
-        )
+        return val
     
     @property
     def localityName(self) -> typing.Union[str, schemas.Unset]:
         val = self.get("localityName", schemas.unset)
         if isinstance(val, schemas.Unset):
             return val
-        return typing.cast(
-            str,
-            val
-        )
+        return val
     
     @property
     def organizationName(self) -> typing.Union[str, schemas.Unset]:
         val = self.get("organizationName", schemas.unset)
         if isinstance(val, schemas.Unset):
             return val
-        return typing.cast(
-            str,
-            val
-        )
+        return val
     
     @property
     def organizationalUnitName(self) -> typing.Union[str, schemas.Unset]:
         val = self.get("organizationalUnitName", schemas.unset)
         if isinstance(val, schemas.Unset):
             return val
-        return typing.cast(
-            str,
-            val
-        )
+        return val
     
     @property
     def emailAddress(self) -> typing.Union[str, schemas.Unset]:
         val = self.get("emailAddress", schemas.unset)
         if isinstance(val, schemas.Unset):
             return val
-        return typing.cast(
-            str,
-            val
-        )
+        return val
     
     def get_additional_property_(self, name: str) -> typing.Union[schemas.OUTPUT_BASE_TYPES, schemas.Unset]:
         schemas.raise_if_key_known(name, self.__required_keys__, self.__optional_keys__)
