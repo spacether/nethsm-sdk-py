@@ -59,10 +59,12 @@ nethsm-api.yaml:
 nethsm-client: nethsm-api.yaml
 	mkdir -p "${OPENAPI_OUTPUT_DIR}"
 	python tools/transform_nethsm_api_spec.py nethsm-api.yaml "${OPENAPI_OUTPUT_DIR}/nethsm-api.json"
-	docker run --rm -ti -v "${OPENAPI_OUTPUT_DIR}:/out" \
-		openapijsonschematools/openapi-json-schema-generator-cli:latest generate \
-		-i=/out/nethsm-api.json \
-		-g=python -o=/out/python --package-name=nethsm.client
+
+	java -jar ~/programming/openapi-json-schema-generator/target/openapi-json-schema-generator-cli.jar generate \
+	-i "${OPENAPI_OUTPUT_DIR}/nethsm-api.json" \
+	-g python \
+	-o "${OPENAPI_OUTPUT_DIR}/python" \
+	--additional-properties packageName=nethsm.client
 	cp -r "${OPENAPI_OUTPUT_DIR}/python/src/nethsm/client" nethsm
 
 .PHONY: test
