@@ -21,7 +21,7 @@ Properties = typing.TypedDict(
 )
 
 
-class InfoDataDict(schemas.immutabledict[str, str]):
+class InfoDataDict(schemas.immutabledict[str, schemas.OUTPUT_BASE_TYPES]):
 
     __required_keys__: typing.FrozenSet[str] = frozenset({
         "product",
@@ -58,11 +58,17 @@ class InfoDataDict(schemas.immutabledict[str, str]):
     
     @property
     def product(self) -> str:
-        return self.__getitem__("product")
+        return typing.cast(
+            str,
+            self.__getitem__("product")
+        )
     
     @property
     def vendor(self) -> str:
-        return self.__getitem__("vendor")
+        return typing.cast(
+            str,
+            self.__getitem__("vendor")
+        )
     
     def get_additional_property_(self, name: str) -> typing.Union[schemas.OUTPUT_BASE_TYPES, schemas.Unset]:
         schemas.raise_if_key_known(name, self.__required_keys__, self.__optional_keys__)

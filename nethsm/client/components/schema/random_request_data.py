@@ -30,7 +30,7 @@ Properties = typing.TypedDict(
 )
 
 
-class RandomRequestDataDict(schemas.immutabledict[str, int]):
+class RandomRequestDataDict(schemas.immutabledict[str, schemas.OUTPUT_BASE_TYPES]):
 
     __required_keys__: typing.FrozenSet[str] = frozenset({
         "length",
@@ -64,7 +64,10 @@ class RandomRequestDataDict(schemas.immutabledict[str, int]):
     
     @property
     def length(self) -> int:
-        return self.__getitem__("length")
+        return typing.cast(
+            int,
+            self.__getitem__("length")
+        )
     
     def get_additional_property_(self, name: str) -> typing.Union[schemas.OUTPUT_BASE_TYPES, schemas.Unset]:
         schemas.raise_if_key_known(name, self.__required_keys__, self.__optional_keys__)

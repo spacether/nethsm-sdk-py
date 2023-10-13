@@ -23,7 +23,7 @@ Properties = typing.TypedDict(
 )
 
 
-class ProvisionRequestDataDict(schemas.immutabledict[str, str]):
+class ProvisionRequestDataDict(schemas.immutabledict[str, schemas.OUTPUT_BASE_TYPES]):
 
     __required_keys__: typing.FrozenSet[str] = frozenset({
         "adminPassphrase",
@@ -73,7 +73,10 @@ class ProvisionRequestDataDict(schemas.immutabledict[str, str]):
     
     @property
     def systemTime(self) -> str:
-        return self.__getitem__("systemTime")
+        return typing.cast(
+            str,
+            self.__getitem__("systemTime")
+        )
     
     @property
     def unlockPassphrase(self) -> str:

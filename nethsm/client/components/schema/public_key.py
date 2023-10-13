@@ -28,7 +28,7 @@ Properties = typing.TypedDict(
 )
 
 
-class PublicKeyDict(schemas.immutabledict[str, int]):
+class PublicKeyDict(schemas.immutabledict[str, schemas.OUTPUT_BASE_TYPES]):
 
     __required_keys__: typing.FrozenSet[str] = frozenset({
         "mechanisms",
@@ -104,7 +104,10 @@ class PublicKeyDict(schemas.immutabledict[str, int]):
     
     @property
     def operations(self) -> int:
-        return self.__getitem__("operations")
+        return typing.cast(
+            int,
+            self.__getitem__("operations")
+        )
     
     @property
     def restrictions(self) -> key_restrictions.KeyRestrictionsDict:
