@@ -73,10 +73,7 @@ class ProvisionRequestDataDict(schemas.immutabledict[str, str]):
     
     @property
     def systemTime(self) -> str:
-        return typing.cast(
-            str,
-            self.__getitem__("systemTime")
-        )
+        return self.__getitem__("systemTime")
     
     @property
     def unlockPassphrase(self) -> str:

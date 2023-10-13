@@ -64,10 +64,7 @@ class RandomRequestDataDict(schemas.immutabledict[str, int]):
     
     @property
     def length(self) -> int:
-        return typing.cast(
-            int,
-            self.__getitem__("length")
-        )
+        return self.__getitem__("length")
     
     def get_additional_property_(self, name: str) -> typing.Union[schemas.OUTPUT_BASE_TYPES, schemas.Unset]:
         schemas.raise_if_key_known(name, self.__required_keys__, self.__optional_keys__)

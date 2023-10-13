@@ -104,10 +104,7 @@ class PublicKeyDict(schemas.immutabledict[str, int]):
     
     @property
     def operations(self) -> int:
-        return typing.cast(
-            int,
-            self.__getitem__("operations")
-        )
+        return self.__getitem__("operations")
     
     @property
     def restrictions(self) -> key_restrictions.KeyRestrictionsDict:
