@@ -1,6 +1,6 @@
 PACKAGE_NAME=nethsm
 VENV=venv
-PYTHON3=python3
+PYTHON3=python3.9
 PYTHON3_VENV=venv/bin/python3
 FLAKE8_DIRS=$(PACKAGE_NAME)/
 
